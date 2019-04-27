@@ -1,3 +1,9 @@
+su-exec (0.2-1ppa1~debian9) stretch; urgency=medium
+
+  * Build for Debian stretch PPA.
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 27 Apr 2019 22:26:57 +0900
+
 su-exec (0.2-1) unstable; urgency=medium
 
   * Upstream release.
