@@ -1,0 +1,58 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2019 Hiroaki Nakamura <hnakamur@gmail.com>,
+.\"
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH SU-EXEC 1 "Feburary 19 2016"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+su-exec \- switch user and group id, setgroups and exec
+.SH SYNOPSIS
+\fBsu-exec\fP \fIuser-spec\R \fIcommand\fP [ \fIarguments...\fP ]
+.SH DESCRIPTION
+This is a simple tool that will simply execute a program with different privileges. The program will be exceuted directly and not run as a child, like \fBsu\fP and \fBsudo\fP does, which avoids TTY and signal issues (see below).
+.br
+Notice that \fBsu-exec\fP depends on being run by the root user, non-root users do not have permission to change uid/gid.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
+.\" respectively.
+.SH OPTIONS
+\fIuser-spec\fP is either a user name (e.g. \fBnobody\fP) or user name and group name separated with colon (e.g. \fBnobody:ftp\fP). Numeric uid/gid values can be used instead of names. Example:
+
+.nf
+\&  $ su-exec apache:1000 /usr/sbin/httpd -f /opt/www/httpd.conf
+.fi
+
+.SH TTY & parent/child handling
+Notice how \fBsu\fP will make \fBps\fP be a child of a shell while \fBsu-exec\fP just executes \fBps\fP directly.
+
+.nf
+\&  $ docker run -it --rm alpine:edge su postgres -c 'ps aux'
+\&  PID   USER     TIME   COMMAND
+\&      1 postgres   0:00 ash -c ps aux
+\&     12 postgres   0:00 ps aux
+.fi
+
+.nf
+\&  $ docker run -it --rm -v $PWD/su-exec:/sbin/su-exec:ro alpine:edge su-exec postgres ps aux
+\&  PID   USER     TIME   COMMAND
+\&      1 postgres   0:00 ps aux
+.fi
+
+.SH SEE ALSO
+.BR https://github.com/ncopa/su-exec,
+.BR sudo (1),
+.BR su (1).
