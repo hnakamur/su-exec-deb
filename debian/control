@@ -10,7 +10,6 @@ Vcs-Browser: https://github.com/hnakmaur/su-exec-deb.git
 
 Package: su-exec
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: switch user and group id, setgroups and exec.
  This is a simple tool that will simply execute a program with
  different privileges. The program will be exceuted directly
