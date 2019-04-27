@@ -1,3 +1,9 @@
+su-exec (0.2-1ppa1~ubuntu18.04) bionic; urgency=medium
+
+  * Build for Ubuntu bionic on PPA. 
+
+ -- Hiroaki Nakamura <hnakamur@gmail.com>  Sat, 27 Apr 2019 22:30:16 +0900
+
 su-exec (0.2-1) unstable; urgency=medium
 
   * Upstream release.
