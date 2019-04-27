@@ -1,15 +1,21 @@
 Source: su-exec
-Section: unknown
+Section: utils
 Priority: optional
 Maintainer: Hiroaki Nakamura <hnakamur@gmail.com>
 Build-Depends: debhelper (>= 10)
 Standards-Version: 4.1.2
-Homepage: <insert the upstream URL, if relevant>
-#Vcs-Git: https://anonscm.debian.org/git/collab-maint/su-exec.git
-#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/su-exec.git
+Homepage: https://github.com/ncopa/su-exec
+Vcs-Git: https://github.com/hnakmaur/su-exec-deb.git
+Vcs-Browser: https://github.com/hnakmaur/su-exec-deb.git
 
 Package: su-exec
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Description: switch user and group id, setgroups and exec.
+ This is a simple tool that will simply execute a program with
+ different privileges. The program will be exceuted directly
+ and not run as a child, like su and sudo does, which avoids
+ TTY and signal issues.
+ .
+ Notice that su-exec depends on being run by the root user,
+ non-root users do not have permission to change uid/gid.
